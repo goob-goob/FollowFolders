@@ -12,10 +12,10 @@ module.exports = {
     updateFollows: async (req, res) => {
         try {
             // todo
-            console.log('updateFollows: --------------------------------------------------------------------')
-            console.log(req)
+            // console.log('updateFollows: --------------------------------------------------------------------')
+            // console.log(req)
             // console.log(req.body.follow)
-            console.log(req.query)
+            // console.log(req.query)
 
             const follow = await Follow.updateOne(
                 {
@@ -32,7 +32,7 @@ module.exports = {
 
             console.log(`updated? ${follow.acknowledged}`)
 
-            console.log('leaving updateFollows --------------------------------------------------------------------')
+            // console.log('leaving updateFollows --------------------------------------------------------------------')
             res.redirect('/folders')
 
         } catch (error) {

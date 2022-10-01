@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
+    "build": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-css": "npx tailwindcss -i ./src/input.css -o ./public/style.css --watch"
   },
