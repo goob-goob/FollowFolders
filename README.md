@@ -1,5 +1,12 @@
 # FollowFolders for Twitch
 
+update - 9/30/22
+
+the app has all of the basic functionality in. There are still many things to work on and update, but this version has all of the basic parts of the app in place.
+
+
+![ff update 0930222](https://user-images.githubusercontent.com/73396754/193388422-94973ab6-a568-44dd-a0a9-b942897dff87.png)
+
 update - 8/29/22
 
 added very basic functionality, lots more to do!
