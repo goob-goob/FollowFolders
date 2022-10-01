@@ -1,4 +1,4 @@
-# TwitchFollowFolders
+# FollowFolders for Twitch
 
 update - 8/29/22
 
