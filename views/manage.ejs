@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Follow Folders for Twitch</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body class="bg-gray-900">
+
+    <!--                -->
+    <!-- Header section -->
+    <!--                -->
+    <header class="pt-4 border-solid border-b-2 border-b-slate-300">
+        <!-- <h1 class="text-5xl text-white m-4">FollowFolders @folders.ejs</h1> -->
+        <a href="/folders/" class="text-5xl text-white m-4">FollowFolders</a>
+        <h1 class="inline text-5xl text-white">@manage.ejs</h1>
+        <br>
+        <section class="flex justify-between">
+            <p class="text-2xl text-white m-4">Logged in as: <%= user %>
+            </p>
+            <form action="/logout">
+                <button type="submit"
+                    class="px-2 m-4 w-24 inline text-white rounded outline hover:bg-white hover:text-gray-900">Logout</button>
+            </form>
+        </section>
+    </header>
+
+    <!--                              -->
+    <!-- Sub-header section. I guess. -->
+    <!--                              -->
+    <section class="py-4 flex justify-between border-b-white border-b-2">
+
+        <!-- Change Folder -->
+        <!-- Change Folder -->
+        <!-- Change Folder -->
+        <form action="/folders/" class="mx-4">
+            <!-- <label for="folder-select" class="text-white">Change Folder:</label> -->
+            <p class="text-white">Change Folder:</p>
+            <select name="folders" id="folder-select">
+                <% folders.forEach( folder=> { %>
+                    <option value=<%=folder.name %>><%= folder.name %>
+                    </option>
+                    <% }) %>
+            </select>
+            <input type="hidden" name="selected-folder" value="<%= folders.value %>">
+            <button type="submit"
+                class="text-white px-2 outline rounded hover:text-slate-800 hover:bg-white">Go!</button>
+        </form>
+
+        <!-- Create Folder -->
+        <!-- Create Folder -->
+        <!-- Create Folder -->
+        <form action="/folders/createfolder">
+            <input type="text" pattern="^\S*$" name="folder" placeholder="Create New Folder" class="">
+            <button type="submit" formmethod="POST"
+                class="text-white mr-4 border rounded px-2 hover:bg-white hover:text-gray-700">Create New</button>
+            <p class="text-white">Folder names may not contain spaces</p>
+            <p class="text-white">or special characters.</p>
+        </form>
+    </section>
+
+
+
+    <!--                           -->
+    <!-- Folder Management Section -->
+    <!--                           -->
+    <section class="flex justify-center m-4">
+        <section class="bg-gray-700 rounded border">
+            <form action="/folders/deletefolder/" class="m-4">
+                <!-- <label for="folder-select" class="text-white">Change Folder:</label> -->
+                <p class="text-white text-3xl pb-2">Delete Folder:</p>
+                <select name="folderToDelete" id="folder-select">
+                    <% folders.forEach( folder=> { %>
+                        <option value=<%=folder.name %>><%= folder.name %>
+                        </option>
+                        <% }) %>
+                </select>
+                <input type="hidden" name="selected-folder" value="<%= folders.value %>">
+                <button type="submit" class="text-white px-2 outline rounded hover:text-slate-800 hover:bg-white">Delete
+                    Folder</button>
+            </form>
+        </section>
+    </section>
+</body>
+
+</html>

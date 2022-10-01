@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Follow Folders for Twitch</title>
+    <!-- <link rel="stylesheet" href="./css/style.css"> -->
+    <link rel="stylesheet" href="/style.css">
+    <!-- <script src="https://kit.fontawesome.com/f4c2c61264.js" crossorigin="anonymous"></script> -->
+</head>
+
+<body class="bg-gray-900">
+    <!-- Header section -->
+    <header class="pt-4 border-solid border-b-2 border-b-slate-300">
+        <!-- <h1 class="text-5xl text-white m-4">FollowFolders @folders.ejs</h1> -->
+        <a href="/folders/" class="text-5xl text-white m-4">FollowFolders</a>
+        <h1 class="inline text-5xl text-white">@folders.ejs</h1>
+        <br>
+        <section class="flex justify-between">
+            <p class="text-2xl text-white m-4">Logged in as: <%= user %>
+            </p>
+            <form action="/logout">
+                <button type="submit"
+                    class="px-2 m-4 w-24 inline text-white rounded outline hover:bg-white hover:text-gray-900">Logout</button>
+            </form>
+        </section>
+    </header>
+
+    <!-- Sub-header section. I guess. -->
+    <section class="py-4 flex justify-between border-b-white border-b-2">
+        <section>
+
+            <!-- Change Folder -->
+            <form action="/folders/" class="mx-4">
+                <!-- <label for="folder-select" class="text-white">Change Folder:</label> -->
+                <p class="text-white">Change Folder:</p>
+                <select name="folders" id="folder-select" class="">
+                    <% folders.forEach(folder=> { %>
+                        <% if(folder.name===current) {%>
+                            <option selected value=<%=folder.name %>><%= folder.name %>
+                            </option>
+                            <% } else { %>
+                                <option value=<%=folder.name %>><%= folder.name %>
+                                </option>
+                                <% }}) %>
+                </select>
+                <button type="submit" id="folder-select-button"
+                    class="text-white px-2 outline rounded hover:text-slate-800 hover:bg-white">Go!</button>
+            </form>
+
+            <!-- Delete folder button -->
+            <form action="/folders/manage" class="mt-4 ml-4">
+                <button type="submit" class="p-1 rounded outline text-white">Manage/Delete Folders</button>
+            </form>
+        </section>
+
+        <section>
+            <!-- Create Folder -->
+            <form action="/folders/createfolder">
+                <input type="text" pattern="^\S*$" maxlength="24" name="folder" placeholder="Create New Folder"
+                    class="px-1">
+                <button type="submit" formmethod="POST"
+                    class="text-white mr-4 border rounded px-2 hover:bg-white hover:text-gray-700">Create New</button>
+                <p class="text-white">Folder names may not contain spaces</p>
+                <p class="text-white">or special characters.</p>
+            </form>
+        </section>
+
+    </section>
+
+    <!-- Folder section -->
+    <section class="my-4 flex-row">
+        <h1 class="mx-4 text-white text-3xl">
+            <%= current %>
+        </h1>
+        <ul class="m-4 grid grid-cols-5 gap-4" id="folders-area">
+            <!-- generate list of folders -->
+            <% follows.forEach(follow=> { %>
+                <li class="p-2 bg-gray-700 text-white text-2xl rounded border">
+                    <form action="/follows/updatefollow/">
+                        <p name="following" class="pl-1 pb-1 mb-4 border-b-2 follow-name">
+                            <%= follow.twitchName %>
+                        </p>
+                        <!-- <label for="select-folder">Folder:</label> -->
+                        <!-- <p>Folder:</p> -->
+                        <select name="folder" class="w-full bg-gray-700 folder-select">
+                            <% folders.forEach(folder=> { %>
+                                <% if(folder.name===current) { %>
+                                    <option selected value=<%=folder.name %>><%= folder.name %>
+                                    </option>
+                                    <% } else { %>
+                                        <option value=<%=folder.name %>><%= folder.name %>
+                                        </option>
+                                        <% }}) %>
+                        </select>
+                        <p class="mt-2 px-1">Notes:</p>
+                        <input type="text" rows="1" maxlength="28" placeholder="none" name="notes"
+                            class="mt-2 px-4 placeholder:italic w-full rounded bg-gray-700  focus:outline-slate-500 resize-none follow-note"
+                            value="<%= follow.notes %>">
+                        <input type="hidden" value=<%=follow.twitchName %> name="follow">
+                        <button type="submit"
+                            class="mt-2 mb-1 w-full relative top-1 rounded border bg-gray-800 hover:bg-gray-500">Apply
+                            Changes</button>
+                    </form>
+                </li>
+                <% }) %>
+        </ul>
+    </section>
+</body>
+<script src="/main.js"></script>
+
+</html>
