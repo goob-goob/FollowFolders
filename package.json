@@ -1,7 +1,10 @@
 {
-  "name": "todo-mvc-auth-local",
+  "name": "follow-folders",
   "version": "1.0.0",
-  "description": "",
+  "description": "An app for users of twitch.tv. It helps organize your list of 'follows.'",
+  "engines": {
+    "node": "18.x"
+  },
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
