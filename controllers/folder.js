@@ -26,7 +26,7 @@ module.exports = {
 
             // token[0].token is the token, duh!
             const userData = await getUserInfo(req.user.userName, token[0].token)
-            // console.log(userData)
+            console.log(userData)
 
             if (req.user.userName !== userData[0].login) {
                 console.log('Username does not match twitch information')
