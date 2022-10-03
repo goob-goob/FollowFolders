@@ -115,19 +115,24 @@ module.exports = {
 }
 
 const getUserInfo = async (userName, token) => {
-    const request = await fetch(`https://api.twitch.tv/helix/users?login=${userName}`, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Client-Id': `${process.env.CLIENT_ID}`
-        }
-    })
-
-    const userdata = await request.json()
+    try {
+        const request = await fetch(`https://api.twitch.tv/helix/users?login=${userName}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Client-Id': `${process.env.CLIENT_ID}`
+            }
+        })
+    
+        const userdata = await request.json()
+        
+        return userdata.data
+    } catch (error) {
+        console.log(error)
+    }
 
     // console.log(userdata)
 
-    return userdata.data
 }
 
 const getFollows = async (loginName, accessToken, cursor = '') => {
