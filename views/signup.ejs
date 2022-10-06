@@ -12,23 +12,28 @@
 <body class="bg-gray-900 text-white">
     <header class="py-4 border-b-2 bg-gray-900">
         <a href="/folders/" class="text-5xl text-white m-4">FollowFolders</a>
-        <h1 class="inline text-5xl text-white">@signup.ejs</h1>
+        <!-- <h1 class="inline text-5xl text-white">@signup.ejs</h1> -->
     </header>
     <section class="mt-4">
+        <h1 class="m-4 text-2xl">User name must match your twitch login name.</h1>
         <% if (locals.messages.errors) { %>
             <% messages.errors.forEach( el=> { %>
                 <div class="alert alert-danger">
                     <%= el.msg %>
                 </div>
-                <% }) %>
-                    <% } %>
-                        <form action="/signup" method="POST" class="px-4">
-                            <input type="text" name="userName" placeholder="User Name" class="text-black placeholder:text-black placeholder:italic placeholder:font-medium px-2">
-                            <input type="email" name="email" placeholder="Email" class="text-black placeholder:text-black placeholder:italic placeholder:font-medium px-2">
-                            <input type="password" name="password" placeholder="Password" class="text-black placeholder:text-black placeholder:italic placeholder:font-medium px-2">
-                            <input type="password" name="confirmPassword" placeholder="Confirm Password" class="text-black placeholder:text-black placeholder:italic placeholder:font-medium px-2">
-                            <input type="submit" class="px-2 border rounded text-white">
-                        </form>
+            <% }) %>
+        <% } %>
+        <form action="/signup" method="POST" class="px-4">
+            <input type="text" name="userName" placeholder="User Name"
+                class="text-black placeholder:text-black placeholder:italic placeholder:font-medium px-2">
+            <input type="email" name="email" placeholder="Email"
+                class="text-black placeholder:text-black placeholder:italic placeholder:font-medium px-2">
+            <input type="password" name="password" placeholder="Password"
+                class="text-black placeholder:text-black placeholder:italic placeholder:font-medium px-2">
+            <input type="password" name="confirmPassword" placeholder="Confirm Password"
+                class="text-black placeholder:text-black placeholder:italic placeholder:font-medium px-2">
+            <input type="submit" class="px-2 border rounded text-white">
+        </form>
     </section>
 </body>
 
