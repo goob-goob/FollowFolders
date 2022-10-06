@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="/style.css">
     <script src="https://kit.fontawesome.com/f4c2c61264.js" crossorigin="anonymous"></script>
 </head>
-<body class="bg-gray-900">
+<body class="bg-gray-900 text-white">
     <header class="border-solid border-b-2 border-b-slate-300">
-        <h1 class="text-5xl text-white m-4">FollowFolders @login.ejs</h1>
+        <h1 class="text-5xl text-white m-4">FollowFolders - Login</h1>
         <!-- <p class="text-2xl text-white m-4"> -->
         <!-- </p> -->
     </header>
@@ -24,10 +24,11 @@
             <div class="alert alert-danger"><%= el.msg %></div>
         <% }) %>    
     <% } %>
-    <form action="/login" method="POST" class="m-4">
-        <input type="email" name="email" placeholder="Email">
-        <input type="password" name="password" placeholder="Password">
-        <input type="submit" class="px-2 rounded outline text-white hover:bg-white hover:text-gray-900">
+    <form action="/login" method="POST" class="m-4 text-black">
+        <input type="email" name="email" placeholder="Email" class="px-2 placeholder:text-black">
+        <input type="password" name="password" placeholder="Password" class="px-2 placeholder:text-black">
+        <!-- <input type="submit" class="px-2 rounded outline text-white hover:bg-white hover:text-gray-900"> -->
+        <button type="submit" class="px-2 rounded outline text-white hover:bg-white hover:text-gray-900">Submit</button>
     </form>
 </body>
 </html>

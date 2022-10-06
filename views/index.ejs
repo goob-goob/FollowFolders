@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,14 +9,26 @@
     <link rel="stylesheet" href="/style.css">
     <script src="https://kit.fontawesome.com/f4c2c61264.js" crossorigin="anonymous"></script>
 </head>
+
 <body class="bg-gray-900">
     <header class="border-solid border-b-2 border-b-slate-300 mb-4 p-4">
-        <a href="/folders/" class="text-5xl text-white my-4">FollowFolders</a><h1 class="inline text-5xl text-white">@index.ejs</h1>
+        <a href="/folders/" class="text-5xl text-white m-4">FollowFolders</a>
+        <!-- <h1 class="inline text-5xl text-white"> @index.ejs</h1> -->
+        <br>
     </header>
-    <section class="p-4">
-        <a href="/login" class="text-white rounded border-2 py-2 px-8 hover:bg-white hover:text-slate-700">Login</a>
-        <a href="/signup" class="text-white rounded border-2 py-2 px-8 hover:bg-white hover:text-slate-700"> Signup</a>
+    <section class=" flex justify-center outline-white">
+        <section class="flex w-1/3 h-[800px] flex-col">
+            <section class="h-1/3"></section>
+            <section class="h-1/3 flex-nowrap">
+                <a href="/login"
+                class=" mx-2 my-5 text-white text-2xl text-center rounded border-2 py-2 hover:bg-white hover:text-slate-700 block">Login</a>
+                <a href="/signup"
+                class="mx-2 my-5 text-white text-2xl text-center rounded border-2 py-2 hover:bg-white hover:text-slate-700 block"> Signup</a>
+            </section>            
+            <section class="h-1/3"></section>
+        </section>
     </section>
     <!-- <button class="text-white h-40 w-40 border-2 rounded">test button</button> -->
 </body>
+
 </html>

@@ -6,13 +6,13 @@ const fetch = require('node-fetch')
 module.exports = {
     createFollow: (req, res) => {
         // if(req.user) { res.render('folders.ejs', { user: req.user.userName }) }
-        res.render('index.ejs')
+        // res.render('index.ejs')
         res.redirect('/folders')
     },
     updateFollows: async (req, res) => {
         try {
             // todo
-            // console.log('updateFollows: --------------------------------------------------------------------')
+            console.log('updateFollows: --------------------------------------------------------------------')
             // console.log(req)
             // console.log(req.body.follow)
             // console.log(req.query)
@@ -32,8 +32,13 @@ module.exports = {
 
             console.log(`updated? ${follow.acknowledged}`)
 
-            // console.log('leaving updateFollows --------------------------------------------------------------------')
-            res.redirect('/folders')
+            console.log('leaving updateFollows --------------------------------------------------------------------')
+            
+            if(req.query.current) {
+                res.redirect(`/folders/?folders=${req.query.current}`)
+            } else {
+                res.redirect('/folders')
+            }
 
         } catch (error) {
             console.log(error)
