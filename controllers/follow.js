@@ -22,7 +22,6 @@ module.exports = {
                     }
                 }
             )
-            // console.log(`updated? ${follow.acknowledged}`)
 
             // if we get a folder in the query, send back to that folder,
             // else go to /folders            
@@ -49,11 +48,6 @@ module.exports = {
         
         console.log('\nreturning from updateMany...')
 
-        // setTimeout(() => {
-        //     res.redirect('/folders')
-        // }, 5000);
-        
-        // Promise.allSettled([updates]).then(() => res.redirect(`/folders`))
         res.send({redirect: '/folders'})
     }
 }
@@ -80,7 +74,6 @@ const updateManyFollows = async (list, name) => {
                 }
                 )
                 
-                // console.log(`updated? `, update)
             } catch (error) {
                 console.log(error)
             }
