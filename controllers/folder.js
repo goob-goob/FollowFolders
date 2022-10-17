@@ -23,7 +23,7 @@ module.exports = {
             // token[0].token is the token, duh!
             const userData = await getUserInfo(req.user.userName, token)
             // console.log(userData)
-            if(!userData) { res.redirect('/signup') }
+            if (!userData) { res.redirect('/signup') }
             if (req.user.userName !== userData[0].login) {
                 console.log('Username does not match twitch information')
                 res.redirect('/')
@@ -32,7 +32,9 @@ module.exports = {
             const twitchID = userData[0].id
             const follows = await getFollows(twitchID, token)
             // console.log(follows)
-
+            
+            // looking for a default folder, in case this is the first time
+            // someone has logged in. Create the folder if it IS the first time (or it has been deleted)
             const defaultFolder = await Folder.find({ name: 'uncategorized', follower: req.user.userName })
             if (!defaultFolder.length) {
                 await Folder.create({ name: 'uncategorized', follower: req.user.userName })
@@ -51,15 +53,16 @@ module.exports = {
             const liveStreams = await getLiveStreams(follows, token)
             // console.log(liveStreams)
 
-            // get ids for livestreams
-            const liveIds = [] 
+            // get ids for livestreams, we will use this for a section that displays
+            // live streams specifically
+            const liveIds = []
             liveStreams.forEach(element => { liveIds.push(element.user_id) })
 
             // get indices for those livestreams
             let trimIndices = []
             let dbLiveList = []
-            for(let i = 0; i < dbFollowList.length; i++) {
-                if(liveIds.find(element => element === dbFollowList[i].twitchID)) {
+            for (let i = 0; i < dbFollowList.length; i++) {
+                if (liveIds.find(element => element === dbFollowList[i].twitchID)) {
                     trimIndices.push(i)
                     dbLiveList.push(dbFollowList[i])
                 }
@@ -72,10 +75,10 @@ module.exports = {
             // for(let i = 0; i < dbFollowList.length; i++) {
             //     if(liveIds.find(element => element === dbFollowList.))
             // }
-            
+
             // trim those livestreams from dbFollowList
             trimIndices.reverse()
-            for(let id of trimIndices) {
+            for (let id of trimIndices) {
                 dbFollowList.splice(id, 1)
             }
 
@@ -111,13 +114,15 @@ module.exports = {
 
             const folderToDelete = req.query.folderToDelete
             const followsToMove = await Follow.find({ folder: folderToDelete, follower: req.user.userName })
-   
-            const update = await Follow.updateMany({ parentFolder: folderToDelete , follower: req.user.userName}, { $set: { "parentFolder": "uncategorized" } })
+
+            const update = await Follow.updateMany({ parentFolder: folderToDelete, follower: req.user.userName }, {
+                $set: { "parentFolder": "uncategorized" }
+            })
             // console.log(update)
 
             const deleted = await Folder.deleteOne({ name: folderToDelete, follower: req.user.userName })
             // console.log(deleted)
-            
+
             res.redirect('/folders/manage')
         } catch (err) {
             console.log(err)
@@ -170,7 +175,7 @@ const getUserInfo = async (userName, token) => {
         // console.log(request)
         const userdata = await request.json()
         // console.log(userdata)
-        
+
         console.log(`getUserInfo() successful. Returning...`)
         return userdata.data
     } catch (error) {
@@ -274,12 +279,12 @@ const getLiveStreams = async (list, token, cursor = '') => {
     // remove entries from our 'array' list as they are added into 'ids' list,
     // send request to twitch to get streams that are live from the list we sent,
     // add data to our 'liveStreams' list, which we will return after we have gone through the 'array' list
-    while(array.length) {
+    while (array.length) {
         let ids = []
         // console.log(`while...`)
         let length = array.length > maxListLength ? maxListLength : array.length
         // console.log(length)
-        for(let i = 0; i < length; i++) {
+        for (let i = 0; i < length; i++) {
             // console.log(`for... ${i}`)
             // console.log(array[i])
             // console.log(`adding ${array[0].to_id} to the list`)
@@ -296,10 +301,10 @@ const getLiveStreams = async (list, token, cursor = '') => {
 
         let streams = await fetch(`https://api.twitch.tv/helix/streams?first=100${requestIds}`, {
             method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Client-Id': `${process.env.CLIENT_ID}`
-                }
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Client-Id': `${process.env.CLIENT_ID}`
+            }
         })
         // console.log(streams)
         let data = await streams.json()
