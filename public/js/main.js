@@ -47,6 +47,11 @@ const massApplyChanges = async () => {
         },
         body: JSON.stringify(data),
     })    
+
+    // setTimeout(() => {
+    //     location.reload()
+    // }, 500);
+    location.reload()
 }
 
 applyButton.addEventListener('click', massApplyChanges)

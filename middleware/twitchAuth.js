@@ -10,7 +10,7 @@ module.exports = {
         console.log('\ntwitchAccess:')
         console.log(twitchAccess)
 
-        console.log('\ntwitchAccess[0].expiration')
+        // console.log('\ntwitchAccess[0].expiration')
         // console.log(twitchAccess[0].expiration)
         
         // Is there is an access token in the database?
@@ -19,6 +19,15 @@ module.exports = {
             // const twitch = await Access.findById(twitchAccess._id)
 
             // check if the current token has expired
+            console.log()
+            console.log('database token expiration:')
+            console.log(twitchAccess[0].expiration)
+            console.log()
+            console.log('todays date:')
+            console.log(Date(Date.now()))
+            console.log()
+            console.log('is database token expiration > today?')
+            console.log(twitchAccess[0].expiration > Date.now())
             if (twitchAccess[0].expiration > Date.now()) {
                 console.log('Token not yet expired.')
                 next()
@@ -78,7 +87,7 @@ const getNewTwitchToken = async (databaseID) => {
             const updated = await Access.findOneAndUpdate( databaseID, { token: data.access_token, expiration: newExpiration})
             console.log(updated)
         } else {
-            await Access.create( { token: data.access_token, expiration: date } )
+            await Access.create( { token: data.access_token, expiration: newExpiration } )
         }
 
     } catch (error) {
