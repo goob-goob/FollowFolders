@@ -12,6 +12,7 @@ module.exports = {
             const folder = req.query.folders
 
             let token = await Access.find({ token: { $exists: true } })
+            console.log(token)
             // token[0].token is the token, duh!
             // reassigning for clarity
             token = token[0].token
