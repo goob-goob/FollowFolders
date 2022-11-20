@@ -1,13 +1,14 @@
 const Access = require('../models/Access')
 const User = require('../models/User')
+const fetch = require('node-fetch');
 
 module.exports = {
     ensureTwitch: async function (req, res, next) {
     
         console.log('\nFUNCTION: ensureTwitch:')
         const twitchAccess = await Access.find( { token: { $exists: true } } )
-        // console.log('\ntwitchAccess:')
-        // console.log(twitchAccess)
+        console.log('\ntwitchAccess:')
+        console.log(twitchAccess)
 
         console.log('\ntwitchAccess[0].expiration')
         // console.log(twitchAccess[0].expiration)
@@ -50,7 +51,7 @@ module.exports = {
 
 const getNewTwitchToken = async (databaseID) => {
     try {
-        console.log('\nFUNCTION: getNewTwitchToken')
+        console.log('\nFUNCTION: getNewTwitchToken databaseID === ', databaseID)
         // fetch request to get a new token
         const response = await fetch(process.env.GET_TOKEN, {
             method: 'post',
@@ -61,17 +62,24 @@ const getNewTwitchToken = async (databaseID) => {
 
         // parse the response
         const data = await response.json()
-        // console.log(data)
+        console.log(data)
 
         // expiration is in seconds,
         // turn the expiration into something useable and readable
         const newExpiration = (data.expires_in * 1000) + Date.now()
-        // console.log(`newExpiration: ${newExpiration}`)
+        console.log(`newExpiration: ${newExpiration}`)
         const date = new Date(newExpiration)
 
+
         // update database
-        // console.log(`Adding token: ${data.access_token} with expiration at ${date}`)
-        await Access.findOneAndUpdate( databaseID, { token: data.access_token, expiration: newExpiration})
+        console.log(`Adding token: ${data.access_token} with expiration at ${date}`)
+        if(databaseID) {
+
+            const updated = await Access.findOneAndUpdate( databaseID, { token: data.access_token, expiration: newExpiration})
+            console.log(updated)
+        } else {
+            await Access.create( { token: data.access_token, expiration: date } )
+        }
 
     } catch (error) {
         console.log(`Error in getNewTwitchToken:\n${error}`)
