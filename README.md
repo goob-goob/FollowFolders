@@ -1,5 +1,9 @@
 # FollowFolders for Twitch
 
+update - 10/20/22 
+
+fixed a bug with refreshing the api token for twitch.tv
+
 update - 9/30/22
 
 the app has all of the basic functionality in. There are still many things to work on and update, but this version has all of the basic parts of the app in place.
