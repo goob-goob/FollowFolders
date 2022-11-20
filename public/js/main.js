@@ -48,9 +48,6 @@ const massApplyChanges = async () => {
         body: JSON.stringify(data),
     })    
 
-    // setTimeout(() => {
-    //     location.reload()
-    // }, 500);
     location.reload()
 }
 

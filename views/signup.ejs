@@ -15,7 +15,9 @@
         <!-- <h1 class="inline text-5xl text-white">@signup.ejs</h1> -->
     </header>
     <section class="mt-4">
-        <h1 class="m-4 text-2xl">User name must match your twitch login name.</h1>
+        <h3 class="mx-4 mt-4 text-2xl">User name must match your twitch login name</h3>
+        <h3 class="ml-4 mb-4 text-xl">(which may be different than the display name)</h3>
+        
         <% if (locals.messages.errors) { %>
             <% messages.errors.forEach( el=> { %>
                 <div class="alert alert-danger">
