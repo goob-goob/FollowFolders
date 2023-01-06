@@ -84,7 +84,7 @@
     <!-------------------->
     <!-- Folder section -->
     <!-------------------->
-    <section class="my-4 flex-row">
+    <section class="my-4 flex-row bg-gray-900">
         <section class="flex justify-between">
             <h1 class="inline mx-4 mb-4 mt-1 text-white text-3xl folder-current">
                 Folder: <%= current %>
@@ -98,7 +98,7 @@
         <% if(liveFollows.length) { %>
         <ul class=" p-2 border-y-2 bg-slate-500">
             <h1 class="m-4 text-white text-3xl">LIVE NOW</h1>
-            <section class="m-4 py-2 bg-slate-500 grid grid-cols-5 gap-4 ">
+            <section class="m-4 py-2 bg-slate-500 grid grid-cols-5 gap-5 ">
             <% liveFollows.forEach(stream => { %>
                 <li class="p-2 bg-gray-700 text-white text-2xl rounded border ">
                     <section class="mb-2 border-b-2 flex justify-between">
@@ -141,11 +141,11 @@
         <!-- Offline section, shows everyone not currently streaming -->
         <!------------------------------------------------------------->
         <h1 class="mx-4 mt-8 text-white text-2xl">Offline</h1>
-        <ul class="m-4 grid grid-cols-5 gap-4" id="folders-area">
+        <ul class="m-4 grid grid-cols-4 gap-5" id="folders-area">
 
             <!-- generate list of folders -->
             <% follows.forEach(follow=> { %>
-                <li class="p-2 bg-gray-700 text-white text-2xl rounded border">
+                <li class="p-2 bg-gray-700 text-white text-2xl rounded border hover:border-2 shadow-md shadow-slate-400 hover:-translate-x-2 hover:-translate-y-2">
                     <section class="mb-2 border-b-2 flex justify-between">
                         <p name="following" class="pl-1 mb-3 w-1/2 follow-name">
                             <%= follow.twitchName %>
