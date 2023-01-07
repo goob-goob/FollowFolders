@@ -8,6 +8,7 @@ const MAX = 100; // used when getting list of follows, the twitch api returns up
 module.exports = {
     getFolders: async (req, res) => {
         console.log('getFolders()')
+        console.log('query: ', req.query)
         try {
             const folder = req.query.folders
 
@@ -30,7 +31,7 @@ module.exports = {
             // need the twitch id to use the twitch api
             const twitchID = userData[0].id
 
-            // get a list of the user
+            // get a list of the user follows
             const follows = await getFollows(twitchID, token)
             
             // looking for a default folder, in case this is the first time
