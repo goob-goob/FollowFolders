@@ -1017,6 +1017,14 @@ video {
   outline-color: #fff;
 }
 
+.outline-slate-700 {
+  outline-color: #334155;
+}
+
+.outline-slate-900 {
+  outline-color: #0f172a;
+}
+
 .transition-transform {
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
