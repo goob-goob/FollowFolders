@@ -84,13 +84,13 @@
                         <% if(folder.name===current) {%>
                             <form action="/folders">
                                 <input type="submit" value="<%= folder.name %>" name="folders" 
-                                    class="py-2 my-1 w-full text-white bg-cyan-700 hover:bg-cyan-500 rounded outline outline-2">
+                                    class="py-2 my-1 w-full text-white bg-gray-500 hover:bg-cyan-500 rounded outline outline-2">
                                 </input>
                             </form>
                             <% } else { %>
                                 <form action="/folders">
                                     <input type="submit" value="<%= folder.name %>" name="folders" value="<%= folder.name %>"
-                                        class="py-2 my-1 w-full text-white bg-cyan-700 hover:bg-cyan-500 rounded outline outline-1">
+                                        class="py-2 my-1 w-full text-white bg-gray-500 hover:bg-cyan-500 rounded outline outline-1">
                                     </input>
                             </form>
                         <% }}) %>
@@ -116,7 +116,7 @@
                         <h1 class="mx-4 text-white text-3xl">STREAMING LIVE NOW</h1>
                         <section class="mx-2 py-2 bg-slate-500 grid grid-cols-4 gap-6 animate-bg-pulse">
                             <% liveFollows.forEach(stream=> { %>
-                                <li class="p-2 bg-gray-700 text-white text-lg rounded border ">
+                                <li class="p-2 transition-transform hover:-translate-x-1 hover:-translate-y-1 bg-gray-700 hover:bg-gray-500 text-white text-md rounded outline outline-2 outline-white hover:outline-4 ">
                                     <section class="mb-2 border-b-2 flex justify-between relative">
                                         <p name="following" class="pl-1 mb-3 w-1/2 follow-name">
                                             <%= stream.twitchName %>
@@ -132,7 +132,7 @@
                                     <!-- <label for="select-folder">Folder:</label> -->
                                     <!-- <p>Folder:</p> -->
                                     <select name="folder"
-                                        class="pl-1 w-full bg-gray-700 folder-form folder-form-select">
+                                        class="pl-1 w-full bg-inherit folder-form folder-form-select">
                                         <% folders.forEach(folder=> { %>
                                             <% if(folder.name===current) { %>
                                                 <option selected value=<%=folder.name %>><%= folder.name %>
@@ -144,7 +144,7 @@
                                     </select>
                                     <p class="mt-2 px-1">Notes:</p>
                                     <input type="text" rows="1" maxlength="28" placeholder="none" name="notes"
-                                        class="mt-2 px-4 placeholder:italic w-full rounded bg-gray-700 italic focus:outline-slate-500 resize-none folder-form folder-form-note"
+                                        class="mt-2 px-4 placeholder:italic w-full rounded bg-inherit italic focus:outline-slate-500 resize-none folder-form folder-form-note"
                                         value="<%= stream.notes %>">
                                     <input type="hidden" value=<%=stream.twitchName %> name="follow"
                                     class="folder-form
@@ -173,7 +173,7 @@
                     <!-- generate list of folders -->
                     <% follows.forEach(follow=> { %>
                         <li
-                            class="p-2 bg-gray-700 text-white text-lg rounded outline outline-2 outline-white hover:outline-4 shadow-md shadow-slate-400 hover:-translate-x-1 hover:-translate-y-1 hover:bg-gray-600">
+                            class="p-2 bg-gray-700 text-white text-md transition-transform rounded outline outline-2 outline-white hover:outline-4 shadow-md shadow-slate-400 hover:-translate-x-1 hover:-translate-y-1 hover:bg-gray-600">
                             <section class="mb-2 border-b-2 flex justify-between">
                                 <p name="following" class="pl-1 mb-3 w-1/2 follow-name">
                                     <%= follow.twitchName %>
