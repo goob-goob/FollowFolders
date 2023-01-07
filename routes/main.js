@@ -10,6 +10,10 @@ router.post('/login', authController.postLogin)
 router.get('/logout', authController.logout)
 router.get('/signup', authController.getSignup)
 router.post('/signup', authController.postSignup)
+router.get('/forgot', authController.getPasswordForgot)
+router.post('/forgot', authController.postPasswordForgot)
+router.get('/reset/:token', authController.getPasswordReset)
+router.post('/reset/:token', authController.postPasswordReset)
 
 
 // old code, for use with authorization code flow 

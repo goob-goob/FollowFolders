@@ -35,38 +35,13 @@
             </form>
         </section>
     </header>
-    
+
     <!---------------------------------->
     <!-- Sub-header section. I guess. -->
     <!---------------------------------->
     <section class="py-4 flex justify-between border-b-white border-b-2">
-        
-        <section>
 
-            <!-- Change Folder -->
-            <form action="/folders/" class="mx-4">
-                <!-- <label for="folder-select" class="text-white">Change Folder:</label> -->
-                <p class="text-white">Change Folder:</p>
-                <select name="folders" id="folder-select" class="">
-                    <% folders.forEach(folder=> { %>
-                        <% if(folder.name===current) {%>
-                            <option selected value=<%=folder.name %>><%= folder.name %>
-                            </option>
-                            <% } else { %>
-                                <option value=<%=folder.name %>><%= folder.name %>
-                                </option>
-                                <% }}) %>
-                </select>
-                <button type="submit" id="folder-select-button"
-                    class="text-white px-2 outline rounded hover:text-slate-800 hover:bg-white">Go!</button>
-            </form>
 
-            <!-- Delete folder button -->
-            <form action="/folders/manage" class="mt-4 ml-4">
-                <button type="submit" class="p-1 rounded outline text-white">Manage/Delete Folders</button>
-            </form>
-        
-        </section>
         <section>
 
             <!-- Create Folder -->
@@ -84,102 +59,157 @@
     <!-------------------->
     <!-- Folder section -->
     <!-------------------->
-    <section class="my-4 flex-row">
-        <section class="flex justify-between">
-            <h1 class="inline mx-4 mb-4 mt-1 text-white text-3xl folder-current">
-                Folder: <%= current %>
-            </h1>
-            <button id="apply-all-button" class="mb-4 mx-4 py-2 px-4 inline text-white text-2xl border rounded hover:bg-white hover:text-slate-700 apply-all-button">Apply All Changes</button>
-        </section>
 
+    <!-- header/info -->
+    <section class="flex justify-between mt-4">
+        <h1 class="inline mx-4 mb-4 mt-1 text-white text-3xl folder-current">
+            Folder: <%= current %>
+        </h1>
+        <button id="apply-all-button"
+            class="mb-4 mx-4 py-2 px-4 inline text-white text-2xl border rounded hover:bg-white hover:text-slate-700 apply-all-button">Apply
+            All Changes</button>
+    </section>
+
+    <section class=" bg-gray-900 pt-4 flex outline outline-white">
+    <!-- <section class=" bg-gray-900 border-4 border-blue-500 flex"> -->
+
+        <!-- side/list -->
+        <section class=" w-1/3">
+        <!-- <section class="border-2 border-red-500 w-1/3"> -->
+            <section>
+                <!-- Change Folder -->
+
+                <section class="w-full px-4">
+                    <% folders.forEach(folder=> { %>
+                        <% if(folder.name===current) {%>
+                            <form action="/folders">
+                                <input type="submit" value="<%= folder.name %>" name="folders" 
+                                    class="py-2 my-1 w-full text-white bg-gray-500 hover:bg-cyan-500 rounded outline outline-2">
+                                </input>
+                            </form>
+                            <% } else { %>
+                                <form action="/folders">
+                                    <input type="submit" value="<%= folder.name %>" name="folders" value="<%= folder.name %>"
+                                        class="py-2 my-1 w-full text-white bg-gray-500 hover:bg-cyan-500 rounded outline outline-1">
+                                    </input>
+                            </form>
+                        <% }}) %>
+                </section>
+
+                <!-- Delete folder button -->
+                <form action="/folders/manage" class="mt-4 ml-4">
+                    <button type="submit" class="p-1 rounded outline text-white">Manage/Delete
+                        Folders</button>
+                </form>
+
+            </section>
+        </section>
+        <!-- </section>> -->
         <!---------------------->
         <!-- LIVE NOW section -->
         <!---------------------->
-        <% if(liveFollows.length) { %>
-        <ul class=" p-2 border-y-2 bg-slate-500">
-            <h1 class="m-4 text-white text-3xl">LIVE NOW</h1>
-            <section class="m-4 py-2 bg-slate-500 grid grid-cols-5 gap-4 ">
-            <% liveFollows.forEach(stream => { %>
-                <li class="p-2 bg-gray-700 text-white text-2xl rounded border ">
-                    <section class="mb-2 border-b-2 flex justify-between">
-                        <p name="following" class="pl-1 mb-3 w-1/2 follow-name">
-                            <%= stream.twitchName %>
-                        </p>
-                        <!-- <p class="w-1/2 text-right mx-2"></p><div class="rounded-full bg-green-600 w-5 h-3 m-4"></div> -->
-                    <form action="/follows/updatefollow/" class="folder-form">
+        <section class="rounded outline outline-slate-900">
+        <!-- <section class="border-2 border-yellow-500"> -->
+            <section class="mr-4">
+                <% if(liveFollows.length) { %>
+                    <ul class=" p-2 bg-slate-500 animate-bg-pulse">
+                        <h1 class="mx-4 text-white text-3xl">STREAMING LIVE NOW</h1>
+                        <section class="mx-2 py-2 bg-slate-500 grid grid-cols-4 gap-6 animate-bg-pulse">
+                            <% liveFollows.forEach(stream=> { %>
+                                <li class="p-2 transition-transform hover:-translate-x-1 hover:-translate-y-1 bg-gray-700 hover:bg-gray-500 text-white text-md rounded outline outline-2 outline-white hover:outline-4 ">
+                                    <section class="mb-2 border-b-2 flex justify-between relative">
+                                        <p name="following" class="pl-1 mb-3 w-1/2 follow-name">
+                                            <%= stream.twitchName %>
+                                        </p>
+                                        <span class="absolute flex h-3 w-3 top-3 right-2">
+                                            <span
+                                                class="animate-ping inline-flex absolute h-full w-full rounded-full bg-green-600 opacity-75"></span>
+                                            <span class="relative inline-flex rounded-full h-3 w-3 bg-green-600"></span>
+                                        </span>
+                                        <!-- <p class="w-1/2 text-right mx-2"></p><div class="rounded-full bg-green-600 w-5 h-3 m-4"></div> -->
+                                        <form action="/follows/updatefollow/" class="folder-form">
+                                    </section>
+                                    <!-- <label for="select-folder">Folder:</label> -->
+                                    <!-- <p>Folder:</p> -->
+                                    <select name="folder"
+                                        class="pl-1 w-full bg-inherit folder-form folder-form-select">
+                                        <% folders.forEach(folder=> { %>
+                                            <% if(folder.name===current) { %>
+                                                <option selected value=<%=folder.name %>><%= folder.name %>
+                                                </option>
+                                                <% } else { %>
+                                                    <option value=<%=folder.name %>><%= folder.name %>
+                                                    </option>
+                                                    <% }}) %>
+                                    </select>
+                                    <p class="mt-2 px-1">Notes:</p>
+                                    <input type="text" rows="1" maxlength="28" placeholder="none" name="notes"
+                                        class="mt-2 px-4 placeholder:italic w-full rounded bg-inherit italic focus:outline-slate-500 resize-none folder-form folder-form-note"
+                                        value="<%= stream.notes %>">
+                                    <input type="hidden" value=<%=stream.twitchName %> name="follow"
+                                    class="folder-form
+                                    folder-form-twitchname">
+                                    <input type="hidden" value=<%=current %> name="current">
+                                    <button type="submit"
+                                        class="mt-2 mb-1 w-full relative top-1 rounded border bg-gray-800 hover:bg-gray-500">Apply
+                                        Changes</button>
+                                    </form>
+                                </li>
+                                <% }) %>
                         </section>
-                        <!-- <label for="select-folder">Folder:</label> -->
-                        <!-- <p>Folder:</p> -->
-                        <select name="folder" class="w-full bg-gray-700 folder-form folder-form-select">
-                            <% folders.forEach(folder=> { %>
-                                <% if(folder.name === current) { %>
-                                    <option selected value=<%=folder.name %>><%= folder.name %>
-                                    </option>
-                                    <% } else { %>
-                                        <option value=<%= folder.name %>><%= folder.name %>
+                    </ul>
+                    <% } %>
+
+            </section>
+
+
+            <!------------------------------------------------------------->
+            <!-- Offline section, shows everyone not currently streaming -->
+            <!------------------------------------------------------------->
+            <section>
+                <h1 class="mx-4 mt-4 text-white text-2xl">Offline</h1>
+                <ul class="m-4 grid grid-cols-4 gap-6" id="folders-area">
+
+                    <!-- generate list of folders -->
+                    <% follows.forEach(follow=> { %>
+                        <li
+                            class="p-2 bg-gray-700 text-white text-md transition-transform rounded outline outline-2 outline-white hover:outline-4 shadow-md shadow-slate-400 hover:-translate-x-1 hover:-translate-y-1 hover:bg-gray-600">
+                            <section class="mb-2 border-b-2 flex justify-between">
+                                <p name="following" class="pl-1 mb-3 w-1/2 follow-name">
+                                    <%= follow.twitchName %>
+                                </p>
+                                <!-- <p class="w-1/2 text-right mx-2">LIVE</p><div class="rounded-full bg-green-600 w-4 h-4 mt-[10px]"></div> -->
+                                <form action="/follows/updatefollow/" class="folder-form">
+                            </section>
+                            <!-- <label for="select-folder">Folder:</label> -->
+                            <!-- <p>Folder:</p> -->
+                            <select name="folder" class="w-full bg-inherit folder-form folder-form-select">
+                                <% folders.forEach(folder=> { %>
+                                    <% if(folder.name===current) { %>
+                                        <option selected value=<%=folder.name %>><%= folder.name %>
                                         </option>
-                                        <% }}) %>
-                        </select>
-                        <p class="mt-2 px-1">Notes:</p>
-                        <input type="text" rows="1" maxlength="28" placeholder="none" name="notes"
-                            class="mt-2 px-4 placeholder:italic w-full rounded bg-gray-700 italic focus:outline-slate-500 resize-none folder-form folder-form-note"
-                            value="<%= stream.notes %>">
-                        <input type="hidden" value=<%=stream.twitchName %> name="follow" class="folder-form folder-form-twitchname">
-                        <input type="hidden" value=<%= current %> name="current">
-                        <button type="submit"
-                            class="mt-2 mb-1 w-full relative top-1 rounded border bg-gray-800 hover:bg-gray-500">Apply
-                            Changes</button>
-                    </form>
-                </li>
-            <% }) %>
+                                        <% } else { %>
+                                            <option value=<%=folder.name %>><%= folder.name %>
+                                            </option>
+                                            <% }}) %>
+                            </select>
+                            <p class="mt-2 px-1">Notes:</p>
+                            <input type="text" rows="1" maxlength="28" placeholder="none" name="notes"
+                                class="mt-2 px-4 placeholder:italic w-full rounded bg-inherit  focus:outline-slate-500 resize-none folder-form folder-form-note"
+                                value="<%= follow.notes %>">
+                            <input type="hidden" value=<%=follow.twitchName %> name="follow" class="folder-form
+                            folder-form-twitchname">
+                            <input type="hidden" value=<%=current %> name="current">
+                            <button type="submit"
+                                class="mt-2 mb-1 w-full relative top-1 rounded border bg-gray-800 hover:bg-gray-500">Apply
+                                Changes</button>
+                            </form>
+                        </li>
+                        <% }) %>
+                </ul>
+            </section>
         </section>
-        </ul>
-        <% } %>
-
-
-        <!------------------------------------------------------------->
-        <!-- Offline section, shows everyone not currently streaming -->
-        <!------------------------------------------------------------->
-        <h1 class="mx-4 mt-8 text-white text-2xl">Offline</h1>
-        <ul class="m-4 grid grid-cols-5 gap-4" id="folders-area">
-
-            <!-- generate list of folders -->
-            <% follows.forEach(follow=> { %>
-                <li class="p-2 bg-gray-700 text-white text-2xl rounded border">
-                    <section class="mb-2 border-b-2 flex justify-between">
-                        <p name="following" class="pl-1 mb-3 w-1/2 follow-name">
-                            <%= follow.twitchName %>
-                        </p>
-                        <!-- <p class="w-1/2 text-right mx-2">LIVE</p><div class="rounded-full bg-green-600 w-4 h-4 mt-[10px]"></div> -->
-                    <form action="/follows/updatefollow/" class="folder-form">
-                        </section>
-                        <!-- <label for="select-folder">Folder:</label> -->
-                        <!-- <p>Folder:</p> -->
-                        <select name="folder" class="w-full bg-gray-700 folder-form folder-form-select">
-                            <% folders.forEach(folder=> { %>
-                                <% if(folder.name === current) { %>
-                                    <option selected value=<%=folder.name %>><%= folder.name %>
-                                    </option>
-                                    <% } else { %>
-                                        <option value=<%= folder.name %>><%= folder.name %>
-                                        </option>
-                                        <% }}) %>
-                        </select>
-                        <p class="mt-2 px-1">Notes:</p>
-                        <input type="text" rows="1" maxlength="28" placeholder="none" name="notes"
-                            class="mt-2 px-4 placeholder:italic w-full rounded bg-gray-700  focus:outline-slate-500 resize-none folder-form folder-form-note"
-                            value="<%= follow.notes %>">
-                        <input type="hidden" value=<%=follow.twitchName %> name="follow" class="folder-form folder-form-twitchname">
-                        <input type="hidden" value=<%= current %> name="current">
-                        <button type="submit"
-                            class="mt-2 mb-1 w-full relative top-1 rounded border bg-gray-800 hover:bg-gray-500">Apply
-                            Changes</button>
-                    </form>
-                </li>
-                <% }) %>
-        </ul>
-    </section>
 </body>
-<script src="/js/main.js"></script>
+<!-- <script src="/js/main.js"></script> -->
 
 </html>
