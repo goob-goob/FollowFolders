@@ -19,6 +19,7 @@ module.exports = {
             token = token[0].token
 
             const userData = await getUserInfo(req.user.userName, token)
+            console.log('userData: ', userData)
 
             if (!userData) { res.redirect('/signup') }
             if (req.user.userName !== userData[0].login) {
@@ -162,6 +163,7 @@ const getUserInfo = async (userName, token) => {
         })
 
         const userdata = await request.json()
+        console.log('userdata: ', userdata)
         
         return userdata.data
     } catch (error) {
