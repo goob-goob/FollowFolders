@@ -27,6 +27,8 @@ module.exports = {
             console.log(Date(Date.now()))
             console.log()
             console.log('is database token expiration > today?')
+            console.log('expiration: ', twitchAccess[0].expiration)
+            console.log('today: ', Date.now())
             console.log(twitchAccess[0].expiration > Date.now())
             if (twitchAccess[0].expiration > Date.now()) {
                 console.log('Token not yet expired.')
@@ -37,7 +39,7 @@ module.exports = {
 
                 console.log('Token expired. Getting a new one.')
                 
-                await getNewTwitchToken(twitchAccess._id)
+                await getNewTwitchToken(twitchAccess[0]._id)
                 next()
 
             }
@@ -48,7 +50,7 @@ module.exports = {
             console.log('Failed token check')
             try {
 
-                await getNewTwitchToken(twitchAccess._id)
+                await getNewTwitchToken()
                 next()
 
             } catch (error) {
@@ -84,7 +86,7 @@ const getNewTwitchToken = async (databaseID) => {
         console.log(`Adding token: ${data.access_token} with expiration at ${date}`)
         if(databaseID) {
 
-            const updated = await Access.findOneAndUpdate( databaseID, { token: data.access_token, expiration: newExpiration})
+            const updated = await Access.findOneAndUpdate( { id:databaseID }, { token: data.access_token, expiration: newExpiration})
             console.log(updated)
         } else {
             await Access.create( { token: data.access_token, expiration: newExpiration } )
