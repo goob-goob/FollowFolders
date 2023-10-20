@@ -49,6 +49,7 @@ module.exports = {
             const dbFolderList = await Folder.find({ follower: req.user.userName })
             const dbFollowList = folder ? await Follow.find({ follower: req.user.userName, parentFolder: folder }) :
                 await Follow.find({ follower: req.user.userName, parentFolder: "uncategorized" })
+            console.log('dbFollowList: ', dbFollowList)
 
             // check for live streams from list
             const liveStreams = await getLiveStreams(follows, token)

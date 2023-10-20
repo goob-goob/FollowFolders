@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com
+! tailwindcss v3.1.8 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -30,7 +30,6 @@
 2. Prevent adjustments of font size after orientation changes in iOS.
 3. Use a more readable tab size.
 4. Use the user's configured `sans` font-family by default.
-5. Use the user's configured `sans` font-feature-settings by default.
 */
 
 html {
@@ -45,8 +44,6 @@ html {
   /* 3 */
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   /* 4 */
-  font-feature-settings: normal;
-  /* 5 */
 }
 
 /*
@@ -413,13 +410,54 @@ video {
   height: auto;
 }
 
-/* Make elements with the HTML hidden attribute stay hidden by default */
-
-[hidden] {
-  display: none;
+*, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
 }
 
-*, ::before, ::after {
+::-webkit-backdrop {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
@@ -605,6 +643,10 @@ video {
   margin-bottom: 3rem;
 }
 
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
 .block {
   display: block;
 }
@@ -693,6 +735,12 @@ video {
   width: 16rem;
 }
 
+@-webkit-keyframes bg-pulse {
+  50% {
+    background-color: rgb(51 65 85);
+  }
+}
+
 @keyframes bg-pulse {
   50% {
     background-color: rgb(51 65 85);
@@ -700,7 +748,15 @@ video {
 }
 
 .animate-bg-pulse {
-  animation: bg-pulse 5s ease-in infinite;
+  -webkit-animation: bg-pulse 5s ease-in infinite;
+          animation: bg-pulse 5s ease-in infinite;
+}
+
+@-webkit-keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
 }
 
 @keyframes ping {
@@ -711,7 +767,8 @@ video {
 }
 
 .animate-ping {
-  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  -webkit-animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+          animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
 .resize-none {
@@ -720,6 +777,10 @@ video {
 
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .flex-col {
@@ -754,6 +815,10 @@ video {
   border-radius: 9999px;
 }
 
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+
 .border {
   border-width: 1px;
 }
@@ -768,6 +833,10 @@ video {
 
 .border-b-2 {
   border-bottom-width: 2px;
+}
+
+.border-t-2 {
+  border-top-width: 2px;
 }
 
 .border-solid {
@@ -804,9 +873,9 @@ video {
   background-color: rgb(17 24 39 / var(--tw-bg-opacity));
 }
 
-.bg-cyan-700 {
+.bg-gray-500 {
   --tw-bg-opacity: 1;
-  background-color: rgb(14 116 144 / var(--tw-bg-opacity));
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
 }
 
 .bg-slate-500 {
@@ -824,48 +893,28 @@ video {
   background-color: rgb(22 163 74 / var(--tw-bg-opacity));
 }
 
+.bg-inherit {
+  background-color: inherit;
+}
+
 .bg-gray-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
-.bg-inherit {
-  background-color: inherit;
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
-.bg-\[\#6994F0\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(105 148 240 / var(--tw-bg-opacity));
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
-.bg-\[\#6191F8\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(97 145 248 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#557ED9\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(85 126 217 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#747B8A\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(116 123 138 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#69DBF0\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(105 219 240 / var(--tw-bg-opacity));
-}
-
-.bg-gray-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
-}
-
-.bg-gray-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+.object-none {
+  -o-object-fit: none;
+     object-fit: none;
 }
 
 .p-1 {
@@ -926,12 +975,24 @@ video {
   padding-bottom: 0.5rem;
 }
 
+.pt-1 {
+  padding-top: 0.25rem;
+}
+
+.pt-2 {
+  padding-top: 0.5rem;
+}
+
 .text-center {
   text-align: center;
 }
 
 .text-right {
   text-align: right;
+}
+
+.align-middle {
+  vertical-align: middle;
 }
 
 .text-5xl {
@@ -947,11 +1008,6 @@ video {
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
-}
-
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
 }
 
 .text-4xl {
@@ -1009,16 +1065,8 @@ video {
   outline-width: 1px;
 }
 
-.outline-4 {
-  outline-width: 4px;
-}
-
 .outline-white {
   outline-color: #fff;
-}
-
-.outline-slate-700 {
-  outline-color: #334155;
 }
 
 .outline-slate-900 {
@@ -1029,6 +1077,9 @@ video {
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.info-card {
 }
 
 .placeholder\:font-medium::-moz-placeholder {
@@ -1087,11 +1138,6 @@ video {
   background-color: rgb(75 85 99 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-\[\#69DBF0\]:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(105 219 240 / var(--tw-bg-opacity));
-}
-
 .hover\:text-gray-900:hover {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
@@ -1119,10 +1165,6 @@ video {
 
 .hover\:outline-4:hover {
   outline-width: 4px;
-}
-
-.hover\:outline-2:hover {
-  outline-width: 2px;
 }
 
 .focus\:outline-slate-500:focus {

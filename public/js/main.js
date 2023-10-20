@@ -51,4 +51,8 @@ const massApplyChanges = async () => {
     location.reload()
 }
 
+const toggleInfo = (event) => {
+
+}
+
 applyButton.addEventListener('click', massApplyChanges)
